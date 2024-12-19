@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Scan Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Itim&display=swap" rel="stylesheet">
+    <link href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel = "stylesheet">
+    <style>
+
+        @font-face {
+            font-family: "Themiru";
+            src: url("/static/fonts/Themiru.ttf") format("truetype");
+            font-weight: normal;
+            font-style: normal;
+          }
+        /* General Reset and Styling */
+        body {
+            margin: 0;
+            background-color: black;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 50px;
+            font-family: "Themiru";
+            color: orange;
+        }
+
+        .scan-details {
+            text-align: center;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            font-family: "Spicy Rice", serif;
+  font-weight: 400;
+  font-style: normal;
+        }
+
+        .scan-details > p {
+            background: white;
+            color: #000000;
+            padding: 1rem;
+            font-weight: 700;
+            border-radius: 20px;
+            font-size: 25px;
+            font-family: "Itim", cursive;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            text-align: center;
+            position: relative;
+            width: 250px;
+        }
+
+        .card > h2 {
+            font-family: "Itim", cursive;
+            font-weight: 400;
+            font-style: normal;
+            color: white;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border-spacing: 0;
+            background-color: white; /* White background */
+            color: black; /* Black text */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Ensure rounded corners work */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            font-family: "Itim", cursive;
+            font-size: 16px; /* Increased font size */
+        }
+    
+        th, td {
+            padding: 20px; /* Increased Padding */
+            text-align: left; /* Left-aligned text */
+            font-size: 19px; /* Larger text */
+        }
+    
+        th {
+            background-color: #f7f7f7; /* Light gray header background */
+            font-weight: bold; /* Bold text for header */
+            border-bottom: 2px solid #ddd; /* Divider line under header */
+        }
+    
+        tr {
+            border-bottom: 1px solid #eee; /* Divider line between rows */
+        }
+    
+        tr:hover {
+            background-color: #f9f9f9; /* Slight highlight on hover */
+            transition: background-color 0.4s ease; /* Smooth hover effect */
+        }
+    
+        td {
+            vertical-align: middle; /* Align content vertically */
+        }
+    
+        /* Styling for Severity Boxes */
+        .severity-box {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            color: white;
+            width: 83px;
+        }
+    
+        .severity-box.high {
+            background-color: #dc3545; /* Red for high severity */
+        }
+    
+        .severity-box.medium {
+            background-color: #007bff; /* Blue for medium severity */
+        }
+    
+        .severity-box.low {
+            background-color: #28a745; /* Green for low severity */
+        }
+    
+        .status {
+            font-weight: bold;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: white;
+        }
+    
+        .status.active {
+            background-color: #28a745; /* Green for active */
+        }
+    
+        .status.inactive {
+            background-color: #ffc107; /* Yellow for inactive */
+            color: black; /* Black text for better contrast */
+        }
+    
+        .status.offline {
+            background-color: #dc3545; /* Red for offline */
+        }
+
+        /* Cloudy Orb Container Styles (existing styles) */
+        .cloud-orb {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Numbers inside orbs */
+.cloud-orb .value {
+    position: absolute;
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+    z-index: 10;
+}
+
+/* Cloud layers */
+.cloud-orb::before, 
+.cloud-orb::after,
+.cloud-orb .circle-layer {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+}
+
+/* Main orb base */
+.cloud-orb::before {
+    width: 200px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    border: 1px solid;
+    animation: cloud-spin 6s linear infinite;
+}
+
+/* Second cloud layer */
+.cloud-orb::after {
+    width: 180px;
+    height: 180px;
+    top: 10px;
+    left: 10px;
+    border: 1px solid;
+    animation: cloud-spin 10s linear infinite reverse;
+}
+
+/* Additional circle layers */
+.circle-layer {
+    z-index: -1;
+}
+
+/* Red Cloud Variations */
+.red-cloud::before {
+    border-color: rgba(251, 0, 0,0.5);
+}
+.red-cloud::after {
+    border-color: rgba(255, 125, 125,0.8);
+}
+.red-cloud .circle-layer {
+    background-color: rgba(251, 0, 0,0.4);
+}
+
+/* Blue Cloud Variations */
+.blue-cloud::before {
+    border-color: rgba(255, 153, 58, 0.5);
+}
+.blue-cloud::after {
+    border-color: rgba(232, 151, 38, 0.8);
+}
+.blue-cloud .circle-layer {
+    background-color: rgb(252, 119, 3);
+}
+
+/* Green Cloud Variations */
+.green-cloud::before {
+    border-color: rgba(249, 239, 47, 0.5);
+}
+.green-cloud::after {
+    border-color: rgb(250, 250, 8);
+}
+.green-cloud .circle-layer {
+    background-color: rgba(244, 233, 78, 0.84);
+}
+
+/* Animated Paths for Cloudy Effect */
+@keyframes cloud-spin {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* Additional circle animations */
+@keyframes circle-drift {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    50% {
+        transform: translate(20px, -20px) rotate(180deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(360deg);
+    }
+}
+
+        .value {
+            position: absolute;
+            font-size: 42px;
+            font-weight: bold;
+            color: white;
+            z-index: 10;
+        }
+
+        .download-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .download-link:hover {
+            background-color: #45a049;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #111; /* Dark background for navbar */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+          }
+    
+          .logo {
+            font-size: 2.5rem;
+            color:#5d0606; /* Matching button orange for consistency */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "Crimson Text", serif;
+          }
+    
+          .navContent {
+            display: flex;
+            gap: 2rem;
+            font-size: 1.2rem;
+            list-style: none;
+            padding-right: 45px;
+            justify-content: flex-end; /* Aligns icons to the right */
+          }
+    
+          .navContent a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease-in-out;
+          }
+    
+          .navContent a:hover {
+            color: #f57326; /* Consistent orange hover effect */
+          }
+    
+          /* Responsive adjustments */
+          @media (max-width: 768px) {
+            .navContent {
+              font-size: 1rem;
+              gap: 1rem;
+            }
+            .logo {
+              font-size: 2rem;
+            }
+          }
+    
+          @media (max-width: 480px) {
+            .navContent {
+              display: none; /* Hide links on very small screens */
+            }
+    
+            .logo {
+              font-size: 1.8rem;
+            }
+          }
+
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+          <i class="fa-solid fa-shield"></i>
+        </div>
+        <div class="navContent">
+          <a href="/"
+            ><div><i class="fa-solid fa-house"></i></div
+          ></a>
+          <a href="/home"
+            ><div><i class="fa-brands fa-xing"></i></div
+          ></a>
+          <a href="/dashboard"
+            ><div><i class="fa-solid fa-chart-line"></i></div
+          ></a>
+          {% if session['logged_in'] %}
+          <a href="/logout"
+            ><div><i class="fa-solid fa-sign-out-alt"></i> Logout</div></a
+          >
+          {% else %}
+          <a href="/login"
+            ><div><i class="fa-solid fa-sign-in-alt"></i> Login</div></a
+          >
+          {% endif %}
+        </div>
+      </div>
+
+    <h1>Scan Results</h1>
+
+    <div class="scan-details">
+        <p>Attack Type: {{ attack_type }}</p>
+        <p>Scan Duration: {{ scan_duration }} seconds</p>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="cloud-orb red-cloud">
+                <div class="circle-layer" style="width: 160px; height: 160px; top: 20px; left: 20px; animation: circle-drift 8s linear infinite;"></div>
+                <div class="circle-layer" style="width: 120px; height: 120px; top: 40px; left: 40px; animation: circle-drift 12s linear infinite reverse;"></div>
+                <p class="value">{{ high_count }}</p>
+            </div>
+            <h2>High Severity Vulnerabilities</h2>
+        </div>
+
+        <div class="card">
+            <div class="cloud-orb blue-cloud">
+                <div class="circle-layer" style="width: 160px; height: 160px; top: 20px; left: 20px; animation: circle-drift 8s linear infinite reverse;"></div>
+                <div class="circle-layer" style="width: 120px; height: 120px; top: 40px; left: 40px; animation: circle-drift 12s linear infinite;"></div>
+                <p class="value">{{ medium_count }}</p>
+            </div>
+            <h2>Medium Severity Vulnerabilities</h2>
+        </div>
+
+        <div class="card">
+            <div class="cloud-orb green-cloud">
+                <div class="circle-layer" style="width: 160px; height: 160px; top: 20px; left: 20px; animation: circle-drift 8s linear infinite;"></div>
+                <div class="circle-layer" style="width: 120px; height: 120px; top: 40px; left: 40px; animation: circle-drift 12s linear infinite reverse;"></div>
+                <p class="value">{{ low_count }}</p>
+            </div>
+            <h2>Low Severity Vulnerabilities</h2>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>S.N</th>
+                <th>Vulnerability</th>
+                <th>url</th>
+                <th>Severity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vulnerability in vulnerabilities %}
+    {% if vulnerability.risk != "Informational" %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ vulnerability.name }}</td>
+            <td>{{vulnerability.url}}</td>
+            <td>
+                <span class="severity-box {{ vulnerability.risk|lower }}">
+                    {{ vulnerability.risk }}
+                </span>
+            </td>
+        </tr>
+    {% endif %}
+{% endfor %}
+
+        </tbody>
+    </table>
+    
+
+    <a href="/download_report/{{ report_path }}" class="download-link">Download Full Report</a>
+    
+</body>
+</html>

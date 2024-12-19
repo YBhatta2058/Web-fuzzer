@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet">
+    <style>
+    :root {
+        --bg-dark: #121212;
+        --bg-darker: #0a0a0a;
+        --text-light: #e0e0e0;
+        --accent-orange: #f57326;
+        --accent-dark-red: #5d0606;
+        --table-border: rgba(255, 255, 255, 0.1);
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-dark);
+        color: var(--text-light);
+        line-height: 1.6;
+        padding: 2rem;
+        margin: 0;
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: #222222;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        color: var(--accent-orange);
+        margin-bottom: 1.5rem;
+        text-align: center;
+        font-size: 2rem;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    th, td {
+        padding: 1rem;
+        text-align: center;
+        border-bottom: 1px solid var(--table-border);
+    }
+    
+    th {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--accent-orange);
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+    
+    tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.03);
+    }
+    
+    .status-dropdown select {
+        padding: 0.5rem;
+        background-color: #333;
+        color: var(--text-light);
+        border: none;
+        border-radius: 4px;
+    }
+    
+    .status-btn {
+        padding: 0.5rem 1rem;
+        background-color: var(--accent-orange);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .status-btn:disabled {
+        background-color: #888;
+        cursor: not-allowed;
+    }
+    
+    /* Toast notification styles */
+    .toast {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        background-color: var(--bg-darker);
+        color: var(--text-light);
+        border-left: 5px solid var(--accent-orange);
+        padding: 1rem;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateX(100%);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 1000;
+    }
+    
+    .toast.show {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .toast.error {
+        border-left-color: #ff4d4d;
+    }
+    
+    .styled-dropdown {
+        width: 100%;
+        max-width: 220px;
+        padding: 10px 5px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+        font-size: 1rem;
+        cursor: pointer;
+        position: relative;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    
+    .styled-dropdown:focus {
+        outline: none;
+        border-color: var(--accent-orange);
+        box-shadow: 0 0 10px var(--accent-orange);
+    }
+    
+    .styled-dropdown option {
+        background-color: #1e1e1e;
+        color: #f0f0f0;
+    }
+    
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #111;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    .logo {
+        font-size: 2.8rem;
+        color: #f57326;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: "Themiru", serif;
+    }
+    
+    .navContent {
+        display: flex;
+        gap: 2.5rem;
+        font-size: 1.1rem;
+        list-style: none;
+        padding-right: 45px;
+        justify-content: flex-end;
+    }
+    
+    .navContent a {
+        text-decoration: none;
+        color: #fff;
+        transition: color 0.3s ease-in-out;
+    }
+    
+    .navContent a:hover {
+        color: var(--accent-orange);
+    }
+    
+    /* Custom arrow for dropdown */
+    .styled-dropdown::after {
+        content: '\f078'; /* Font Awesome arrow icon */
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-light);
+    }
+    
+    .assign-btn {
+        font-size: 1rem;
+        background: rgb(44,10,44);
+        color: white;
+        border-radius: 12px;
+        padding: .4rem .8rem;
+        cursor: pointer;
+    }
+    
+    .assign-btn:hover {
+        background: rgb(0,0,0);
+    }
+    
+    .sidebar {
+        position: fixed;
+        top: 60px; /* Adjusted to avoid overlap with navbar */
+        left: 0;
+        width: 250px;
+        height: calc(100vh - 60px); /* Full height minus navbar */
+        background-color: var(--bg-darker);
+        padding: 1.5rem;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        overflow-y: auto;
+        z-index: 999;
+    }
+    
+    .sidebar .logo {
+        font-size: 2.4rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--accent-orange);
+    }
+    
+    .sidebar .manager-info {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .sidebar .manager-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .sidebar .manager-name {
+        color: var(--text-light);
+        margin-top: 0.5rem;
+    }
+    
+    .sidebar ul {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .sidebar ul li {
+        margin-bottom: 1.5rem;
+    }
+    
+    .sidebar ul li a {
+        text-decoration: none;
+        color: var(--text-light);
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0.8rem 1rem;
+        border-radius: 6px;
+        transition: background 0.3s ease-in-out;
+    }
+    
+    .sidebar ul li a:hover {
+        background-color: rgba(245, 115, 38, 0.2);
+        color: var(--accent-orange);
+    }
+    
+    .content {
+        margin-left: 270px; /* Width of the sidebar + some gap */
+        padding: 2rem;
+        margin-top: 2rem;
+    }
+</style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <i class="fa-solid fa-shield"></i>
+            Manager Dashboard
+        </div>
+        <div class="navContent">
+            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <a href="/home"><i class="fa-brands fa-xing"></i></a>
+            <a href="/dashboard"><i class="fa-solid fa-chart-line"></i></a>
+            <a href = "/payloads"><i class="fa-solid fa-hexagon-nodes"></i></a>
+            {% if session['logged_in'] %}
+            <a href="/logout"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+            {% else %}
+            <a href="/login"><i class="fa-solid fa-sign-in-alt"></i> Login</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="logo">Manager</div>
+        <div class="manager-info">
+            <img src="{{ url_for('static', filename='avatar.png') }}" alt="Manager Avatar" class="manager-avatar">
+            <p class="manager-name">{{current_user.name}}</p>
+        </div>
+        <ul>
+            <li><a href="{{url_for('dashboard')}}"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+            <li><a href="/users"><i class="fa-solid fa-user"></i>Manage Users</a></li>
+            <li><a href="/settings"><i class="fa-solid fa-cogs"></i> Settings</a></li>
+            <li><a href="/reports"><i class="fa-solid fa-file-alt"></i> Reports</a></li>
+            <li><a href="/help"><i class="fa-solid fa-life-ring"></i> Help</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h1>Vulnerabilities Assignment</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Target URL</th>
+                    <th>Attack Type</th>
+                    <th>High</th>
+                    <th>Medium</th>
+                    <th>Low</th>
+                    <th>Assigned Tester</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vulnerability in vulnerabilities %}
+                <tr>
+                    <td>{{ vulnerability.target_url }}</td>
+                    <td>{{ vulnerability.attack_type }}</td>
+                    <td class="severity-high">{{ vulnerability.high_count }}</td>
+                    <td class="severity-medium">{{ vulnerability.medium_count }}</td>
+                    <td class="severity-low">{{ vulnerability.low_count }}</td>
+                  
+                    
+            
+                        {% if vulnerability.tester_assigned == 'yes' %}
+                            <td>{{ vulnerability.tester_name }}</td><td> {{ vulnerability.tester_status }}</td>
+                        {% else %}
+                            
+                                <form class="assign-form" method="POST" action="{{ url_for('assign_tester', scan_id=vulnerability.id) }}" onsubmit="return showToast(event)">
+                                    <td><select name="tester_id" class = "styled-dropdown">
+                                        {% for tester in testers %}
+                                        <option value="{{ tester.id }}">{{ tester.name }}</option>
+                                        {% endfor %}
+                                    </select></td>
+                                    <td><button class="assign-btn" type="submit">Assign</button></td>
+                                </form>
+                                
+                                
+                            
+                        {% endif %}
+                    
+                    
+                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+       
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        function showToast(event) {
+            event.preventDefault();
+            const form = event.target;
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+            })
+            .then(response => {
+                const toast = document.getElementById('toast');
+                if (response.ok) {
+                    toast.textContent = "Status updated successfully!";
+                    toast.className = "toast show";
+                } else {
+                    toast.textContent = "Sorry, could not update status.";
+                    toast.className = "toast error show";
+                }
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            })
+            .catch(() => {
+                const toast = document.getElementById('toast');
+                toast.textContent = "An unexpected error occurred.";
+                toast.className = "toast error show";
+                setTimeout(() => toast.classList.remove('show'), 3000);
+            });
+        }
+    </script>
+</body>
+</html>

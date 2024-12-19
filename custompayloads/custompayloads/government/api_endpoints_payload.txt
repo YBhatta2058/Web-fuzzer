@@ -1,0 +1,50 @@
+' OR 1=1 --
+' OR 'a'='a' --
+' UNION SELECT NULL, user_id, name FROM citizens --
+' UNION SELECT NULL, id, record_type FROM public_records --
+' UNION SELECT NULL, tax_id, tax_info FROM taxation_records --
+' UNION SELECT NULL, crime_id, case_details FROM law_enforcement_data --
+' AND 1=1 --
+' AND 'a'='a' --
+' UNION SELECT NULL, username, password FROM users --
+' UNION SELECT NULL, first_name, last_name FROM citizens --
+' UNION SELECT NULL, service_id, service_name FROM government_services --
+' UNION SELECT NULL, case_id, officer_id FROM law_enforcement_data --
+' UNION SELECT NULL, name, address FROM citizens WHERE city='New York' --
+' UNION SELECT NULL, record_id, record_name FROM public_records WHERE record_type='Court' --
+' UNION SELECT NULL, tax_id, tax_due FROM taxation_records WHERE tax_year=2021 --
+' UNION SELECT NULL, officer_id, case_type FROM law_enforcement_data WHERE case_status='open' --
+' UNION SELECT NULL, government_id, government_name FROM government_services WHERE service_type='Healthcare' --
+' UNION SELECT NULL, username, role FROM users WHERE role='admin' --
+' UNION SELECT NULL, tax_id, income_level FROM taxation_records WHERE income_level='high' --
+' UNION SELECT NULL, city, population FROM public_records WHERE state='California' --
+' UNION SELECT NULL, first_name, last_name FROM citizens WHERE age BETWEEN 25 AND 40 --
+' UNION SELECT NULL, record_id, record_name FROM public_records WHERE created_date > '2020-01-01' --
+' UNION SELECT NULL, service_id, description FROM government_services WHERE service_type='Transport' --
+' UNION SELECT NULL, officer_id, case_date FROM law_enforcement_data WHERE officer_id='12345' --
+' UNION SELECT NULL, case_id, case_status FROM law_enforcement_data WHERE case_status='closed' --
+' UNION SELECT NULL, citizen_id, email FROM citizens WHERE citizen_id='abc123' --
+' UNION SELECT NULL, government_id, provider_name FROM government_services WHERE service_type='Education' --
+' UNION SELECT NULL, tax_id, filing_status FROM taxation_records WHERE filing_status='joint' --
+' UNION SELECT NULL, service_id, priority_level FROM government_services WHERE priority_level='high' --
+' UNION SELECT NULL, city, services_available FROM public_records WHERE city='Washington' --
+' UNION SELECT NULL, officer_id, crime_type FROM law_enforcement_data WHERE crime_type='theft' --
+' UNION SELECT NULL, tax_id, amount_due FROM taxation_records WHERE amount_due > 10000 --
+' UNION SELECT NULL, case_id, investigation_status FROM law_enforcement_data WHERE investigation_status='active' --
+' UNION SELECT NULL, first_name, last_name FROM citizens WHERE first_name LIKE 'John%' --
+' UNION SELECT NULL, record_id, description FROM public_records WHERE description LIKE '%court%' --
+' UNION SELECT NULL, tax_id, tax_year FROM taxation_records WHERE tax_year=2022 --
+' UNION SELECT NULL, officer_id, report_details FROM law_enforcement_data WHERE report_type='incident' --
+' UNION SELECT NULL, government_id, contact_number FROM government_services WHERE contact_number IS NOT NULL --
+' UNION SELECT NULL, username, last_login FROM users WHERE last_login > '2023-01-01' --
+' UNION SELECT NULL, record_id, owner FROM public_records WHERE owner='government' --
+' UNION SELECT NULL, case_id, location FROM law_enforcement_data WHERE location='downtown' --
+' UNION SELECT NULL, service_id, service_provider FROM government_services WHERE service_provider='Private' --
+' UNION SELECT NULL, tax_id, refund_amount FROM taxation_records WHERE refund_amount > 500 --
+' UNION SELECT NULL, case_id, resolution_status FROM law_enforcement_data WHERE resolution_status='resolved' --
+' UNION SELECT NULL, government_id, policy_name FROM government_services WHERE policy_name LIKE '%security%' --
+' UNION SELECT NULL, officer_id, department_name FROM law_enforcement_data WHERE department_name='Fraud' --
+' UNION SELECT NULL, first_name, last_name FROM citizens WHERE last_name='Smith' --
+' UNION SELECT NULL, record_id, public_access FROM public_records WHERE public_access='true' --
+' UNION SELECT NULL, tax_id, tax_category FROM taxation_records WHERE tax_category='Corporate' --
+' UNION SELECT NULL, service_id, region FROM government_services WHERE region='East Coast' --

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Text Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="styles.css">
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+<style>
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        background: #111; /* Dark background for navbar */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        left:0;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+        color: #5d0606; /* Matching button orange for consistency */
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: "Crimson Text", serif;
+    }
+
+    .navContent {
+        display: flex;
+        gap: 2rem;
+        font-size: 1.2rem;
+        list-style: none;
+        padding-right: 45px;
+        justify-content: flex-end; /* Aligns icons to the right */
+    }
+
+    .navContent a {
+        text-decoration: none;
+        color: #fff;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .navContent a:hover {
+        color: #f57326; /* Consistent orange hover effect */
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        background-color: #121212;
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        text-align: center;
+    }
+
+    .start-btn {
+        background-color: #f57326;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        margin-left: 20px;
+    }
+
+    .start-btn:hover {
+        background-color: #d14c10;
+    }
+
+    /* Main Section Styles */
+    .main-section {
+        margin-top: 80px;
+        transform: scale(1.2);
+    }
+
+    .main-section h1 {
+        font-size: 4rem;
+        color: #fff;
+    }
+
+    .main-section p {
+        font-size: 1.2rem;
+        color: #f57326;
+        margin-bottom: 30px;
+    }
+
+    .input-section {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    input[type="text"] {
+        width: 60%;
+        padding: 15px;
+        font-size: 1rem;
+        background-color: #333;
+        border: none;
+        border-radius: 8px;
+        color: #fff;
+        outline: none;
+    }
+
+    .selects {
+        display: flex;
+        gap: 15px;
+    }
+
+    select {
+        background-color: #333;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 1rem;
+        border: none;
+    }
+
+    .generate-btn {
+        background-color: #f57326;
+        color: #fff;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+    }
+
+    .generate-btn:hover {
+        background-color: #d14c10;
+    }
+
+    /* Image Section Styles */
+    .image-container {
+        margin-top: 50px;
+    }
+
+    .image-container img {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .fa-file{
+        background: yellow;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    color: black;
+    font-size: 3rem;
+    margin: auto;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+    }
+</style>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="navbar">
+            <div class="logo">
+                <i class="fa-solid fa-shield"></i>
+            </div>
+            <div class="navContent">
+                <a href="/"><i class="fa-solid fa-house"></i></a>
+                <a href="/home"><i class="fa-brands fa-xing"></i></a>
+                <a href="/dashboard"><i class="fa-solid fa-chart-line"></i></a>
+                <a href = "/payloads"><i class="fa-solid fa-hexagon-nodes"></i></a>
+                {% if session['logged_in'] %}
+                <a href="/logout"><i class="fa-solid fa-sign-out-alt"></i> Logout</a>
+                {% else %}
+                <a href="/login"><i class="fa-solid fa-sign-in-alt"></i> Login</a>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Image Section -->
+        <div class="image-container">
+            <i class="fa-solid fa-file"></i>
+        </div>
+
+        <!-- Main Section -->
+        <section class="main-section">
+            <h1>AI Text Generator</h1>
+            <p>Text Generator</p>
+
+            <div class="input-section">
+                <input type="text" placeholder="Input some line here to begin">
+                <div class="selects">
+                    <select>
+                        <option>Select Purpose</option>
+                    </select>
+                    <select>
+                        <option>Select Tone</option>
+                    </select>
+                    <select>
+                        <option>Select Length</option>
+                    </select>
+                </div>
+                <button class="generate-btn">Generate Text</button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
