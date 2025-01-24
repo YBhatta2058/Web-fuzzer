@@ -3,7 +3,6 @@ import time
 from urllib3.exceptions import InsecureRequestWarning
 import urllib3
 
-# Suppress insecure HTTPS warnings
 urllib3.disable_warnings(InsecureRequestWarning)
 
 def connect_to_zap(zap_url):
@@ -11,7 +10,6 @@ def connect_to_zap(zap_url):
     for attempt in range(retries):
         try:
             zap = ZAPv2(proxies={"http": zap_url, "https": zap_url}, apikey="jhn14jksulis4jbmkpgtle39jj")
-            # Check if the API is accessible
             if zap.core.version:
                 return zap
         except Exception:

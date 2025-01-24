@@ -60,10 +60,10 @@ class ScannedURL(db.Model):
     target_url = db.Column(db.String(200), nullable=False)
     attack_type = db.Column(db.String(100), nullable=False)
     scan_duration = db.Column(db.Float, nullable=False)
-    high_count = db.Column(db.Integer, default=0)  # High vulnerabilities count
-    medium_count = db.Column(db.Integer, default=0)  # Medium vulnerabilities count
-    low_count = db.Column(db.Integer, default=0)  # Low vulnerabilities count
-    report_path = db.Column(db.String(300), nullable=True)  # Path to the generated report
+    high_count = db.Column(db.Integer, default=0)  
+    medium_count = db.Column(db.Integer, default=0)  
+    low_count = db.Column(db.Integer, default=0)  
+    report_path = db.Column(db.String(300), nullable=True)  
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     tester_assigned = db.Column(Enum('yes', 'no', name='tester_assigned'), default='no', nullable=False)
 
@@ -74,9 +74,8 @@ class Tester(db.Model):
     scanned_url_id = db.Column(db.Integer, db.ForeignKey('scanned_url.id'), nullable=False)
     status = db.Column(Enum('under review', 'in progress', 'completed', name='status_enum'), default='under review', nullable=False)
 
-    # Relationships for easier access
-    tester = db.relationship('User', foreign_keys=[tester_id])  # Links to the tester's user record
-    scanned_url = db.relationship('ScannedURL', foreign_keys=[scanned_url_id])  # Links to the scanned URL
+    tester = db.relationship('User', foreign_keys=[tester_id])  
+    scanned_url = db.relationship('ScannedURL', foreign_keys=[scanned_url_id])  
 
 with app.app_context():
     db.create_all()
@@ -268,16 +267,10 @@ def payload_generate():
 @app.route('/start_scan', methods=['POST'])
 @login_required
 def start_scan():
-    """Handle the user's input and start the scan."""
-    # Fetch user input
     target_urls = request.form['target_url'].strip().split(',')
     attack_mode = request.form['attack_mode']
 
     scan_type = request.form['scan_type']
-
-
-
-    # Connect to ZAP
     zap_url = "https://localhost:8080" 
     api_key = "d4b8srkheoju3qe1uo8v6pm2k4" 
 
@@ -286,7 +279,6 @@ def start_scan():
         log_message("Failed to connect to ZAP. Please try again.")
         return "Failed to connect to ZAP. Please try again.", 500
 
-    # Create a new session in ZAP
     log_message("Creating a new ZAP session...")
     create_zap_session(zap_url)
 
@@ -306,19 +298,15 @@ def start_scan():
         target_url = target_url.strip()
         log_message(f"Starting scan for {target_url}...")
 
-        # Start time for the scan
         start_time = time.time()
 
-        # Crawling
         log_message("Crawling the target website...")
         crawl_data = crawler.crawl_website(zap, target_url)
         log_message("Crawling completed.")
 
-        # Initialize vulnerabilities and attack_type
         vulnerabilities = []
         attack_type = ""
 
-        # Perform attack based on user input
         log_message(f"Performing {attack_mode} attack...")
         if attack_mode == "1":
             vulnerabilities = attack.attack_website(zap, target_url, attack_type="xss")
@@ -333,26 +321,22 @@ def start_scan():
             vulnerabilities = attack.attack_website(zap, target_url, attack_type="all")
             attack_type = "All Attacks"
         log_message("Attacks completed.")
-
-        # Calculate scan duration
+        
         end_time = time.time()
         scan_duration = round(end_time - start_time, 2)
         log_message(f"Scan completed in {scan_duration} seconds.")
 
-        # Count vulnerabilities
         vuln_counts = {
             'High': len([v for v in vulnerabilities if v['risk'] == "High"]),
             'Medium': len([v for v in vulnerabilities if v['risk'] == "Medium"]),
             'Low': len([v for v in vulnerabilities if v['risk'] == "Low"])
         }
 
-        # Update combined results
         combined_results['total_scan_duration'] += scan_duration
         combined_results['urls_scanned'].append(target_url)
         for severity in ['High', 'Medium', 'Low']:
             combined_results['total_vulnerabilities'][severity] += vuln_counts[severity]
 
-        # Store detailed results for this URL
         combined_results['detailed_results'].append({
             'url': target_url,
             'scan_duration': scan_duration,
@@ -363,7 +347,6 @@ def start_scan():
             'vulnerability_counts': vuln_counts
         })
 
-        # Save the scan result to the database for each URL
         scan = ScannedURL(
             target_url=target_url,
             attack_type=attack_type,
@@ -371,7 +354,7 @@ def start_scan():
             high_count=vuln_counts['High'],
             medium_count=vuln_counts['Medium'],
             low_count=vuln_counts['Low'],
-            report_path="",  # Adjust if individual reports are generated
+            report_path="",
             user_id=current_user.id
         )
         db.session.add(scan)
@@ -398,12 +381,7 @@ def download_report(report_path):
     """Allow users to download the generated report."""
     return send_file(report_path, as_attachment=True)
 
-# @app.route('/download_report2/<int:scan_id>')
-# def download_report2(scan_id):
-#     scanned_url = ScannedURL.query.get(scan_id)
-
 def create_zap_session(zap_url):
-    """Creates a new session in ZAP"""
     params = {
         'name': 'new_session',
         'overwrite': 'true'
