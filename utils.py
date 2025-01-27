@@ -16,8 +16,7 @@ def get_website_content(url):
             'User-Agent': 'Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Mobile Safari/537.36'
         }
         # Make a request to the website
-        response = requests.get(url, headers=headers, timeout=10)
-        response.raise_for_status()  # Raise error for HTTP issues
+        response = requests.get(url, headers=headers, timeout=10, verify=False)
 
         # Parse the HTML content using BeautifulSoup
         soup = BeautifulSoup(response.text, 'html.parser')
@@ -57,9 +56,9 @@ def classify_content_with_gemini(content, api_key="AIzaSyBYpNf7L0sPbuRkr7FlLu0p8
         model = genai.GenerativeModel("gemini-1.5-flash")
 
         # Prepare the prompt to classify the content
-        prompt = ("portfolio, corporate, ecommerce, blogs, news, social_media, educational, government, "
+        prompt = ("portfolio, corporate, ecommerce, blogs, social_media, educational, government, "
                   "entertainment, test_dummy. Based on the above mentioned list classify the following content "
-                  f"into any one category. only give the classified category name as response. The content is: {content}")
+                  f"into any one category. only give the classified category name as response make it all lowercase. The content is: {content}")
 
         # Call the model to classify the content
         response = model.generate_content(prompt)
@@ -83,12 +82,14 @@ def generate_payload_file_path(url, attack_type):
 
         if classification:
             # Construct and return the file path
-            file_path = f"custompayloads/{classification}/{attack_type}_payload.txt"
+            file_path = f"custompayloads/custompayloads/{classification}/payload.txt"
             return file_path
         else:
             return "Error: Unable to classify content."
+    #sometimes certain websites block scraping
     else:
-        return "Error: Unable to extract content from the website."
+        file_path = "custompayloads/custompayloads/test_dummy/payload.txt"
+        return file_path
 
 # Example usage
 url = "https://coursera.com"  # Replace with the website URL to classify

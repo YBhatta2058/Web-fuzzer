@@ -98,7 +98,7 @@
       .title {
         font-size: 6.5rem;
         font-weight: bold;
-        color: rgb(255, 153, 0); /* Orange color */
+        color:#00416A;
         margin-bottom: 1.5rem;
         font-family: "Exwayer", sans-serif;
       }
@@ -106,7 +106,7 @@
       .subtitles {
         font-size: 1.7rem;
         font-weight: 500;
-        color: rgb(255, 150, 234); /* Light pink color */
+        color: #73C2FB; /* Light pink color */
         text-align: center;
         height: 30px; /* Fixed height for subtitles */
         position: relative;
@@ -162,7 +162,7 @@
       }
 
       form button {
-        background-color: #f57326;
+        background-color:#00416A;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -173,7 +173,7 @@
       }
 
       form button:hover {
-        background-color: #e06320;
+        background-color: #7393B3;
       }
 
       .log-container {
@@ -199,7 +199,7 @@
       #typewriter-title::after {
         content: "|"; /* Cursor character */
         font-weight: bold;
-        color: rgb(255, 153, 0); /* Matches the orange title color */
+        color: #00416A; /* Matches the orange title color */
         animation: blink 0.6s step-start infinite;
       }
 
@@ -231,7 +231,7 @@
 
       .logo {
         font-size: 2.5rem;
-        color: #5d0606; /* Matching button orange for consistency */
+        color: #5f6880; /* Matching button orange for consistency */
         display: flex;
         align-items: center;
         gap: 10px;
@@ -347,7 +347,6 @@
         <a href="/dashboard"
           ><div><i class="fa-solid fa-chart-line"></i></div
         ></a>
-        <a href = "/payloads"><i class="fa-solid fa-hexagon-nodes"></i></a>
         {% if session['logged_in'] %}
         <a href="/logout"
           ><div><i class="fa-solid fa-sign-out-alt"></i> Logout</div></a
@@ -379,13 +378,7 @@
               placeholder="Enter Target URL (e.g., example.com)"
               required
             />
-            <select id="attack_mode" name="attack_mode" required>
-              <option value="" disabled selected>Select Vulnerability type</option>
-              <option value="1">XSS</option>
-              <option value="2">SQL Injection</option>
-              <option value="3">Command Injection</option>
-              <option value="4" selected>All</option>
-            </select>
+           
             </div>
             
           <div class = "lower">

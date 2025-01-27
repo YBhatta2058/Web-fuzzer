@@ -4,87 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard - CrashXipher</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Spicy+Rice&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box;
       }
+      
       body {
         margin: 0;
         padding: 0;
-        font-family: "Crimson Text", serif;
+        font-family: "Inter", sans-serif;
         background: #000;
         color: #fff;
-        overflow: hidden;
       }
+
       .container {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 40px;
         background: #111;
+        padding-top: 100px;
+        min-height: 100vh;
       }
+
+      .heading {
+        margin-top: 5px;
+      }
+
       h2 {
-        color: #f57326;
-      }
-      @font-face {
-        font-family: "Themiru";
-        src: url("/static/fonts/Themiru.ttf") format("truetype");
-        font-weight: normal;
+        font-size: 60px;
+        color: #00416A;
+        font-weight: 700;
+        font-family: "Crimson Text", serif;
         font-style: normal;
-      }
-      .scan-history {
-        margin-top: 20px;
-        width: 90%;
-        border-radius: 10px;
-        background: #222;
-        padding: 20px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-        overflow-x: auto;
-        flex-direction: column; /* Makes the table and pagination stack vertically */
-        justify-content: space-between;
-      }
-      .scan-history table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: "Itim", cursive;
-        font-size: 16px; /* Increased font size */
-      }
-      .scan-history th,
-      .scan-history td {
-        padding: 10px;
         text-align: center;
-        border: 1px solid #333;
+        margin-bottom: 20px;
       }
-      .scan-history h3{
-        text-transform: capitalize;
-        font-size: 2rem;
-        padding-bottom: 2rem;
-        font-family: 'Themiru';
-        text-align: center;
-        color: rgb(255, 150, 234);
-        letter-spacing: 2px;
-      }
-      .scan-history th {
-        background-color: #333;
-      }
+
       .navbar {
         display: flex;
         align-items: center;
@@ -97,14 +62,16 @@
         width: 100%;
         z-index: 200;
       }
+
       .logo {
         font-size: 2.5rem;
-        color: #5d0606;
+        color: #3b3e46;
         display: flex;
         align-items: center;
         gap: 10px;
         font-family: "Crimson Text", serif;
       }
+
       .navContent {
         display: flex;
         gap: 2rem;
@@ -113,71 +80,121 @@
         padding-right: 45px;
         justify-content: flex-end;
       }
+
       .navContent a {
         text-decoration: none;
         color: #fff;
         transition: color 0.3s ease-in-out;
       }
+
       .navContent a:hover {
         color: #f57326;
       }
+
       .btn {
         display: inline-block;
-        color: #f57326;
+        color: #00416A;
         padding: 8px 15px;
         border-radius: 5px;
         text-decoration: none;
-        transition: background 0.3s ease;
+        transition: background 0.3s ease, color 0.3s ease;
         background: transparent;
         outline: none;
-        border: none;
+        border: 2px solid #00416A;
         cursor: pointer;
       }
+
       .btn:hover {
-        background: white;
+        background: #00416A;
+        color: white;
       }
+
+      .scan-history {
+        margin-top: 20px;
+        width: 90%;
+        border-radius: 10px;
+        background: #111;
+        padding: 20px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      }
+
+      .scan-history table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+      }
+
+      .scan-history th,
+      .scan-history td {
+        padding: 20px;
+        text-align: center;
+        border: 1px solid #333;
+
+      }
+
+      .scan-history th {
+        background-color: #00416A;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      .scan-history tr:nth-child(even) {
+        background-color: #222;
+      }
+
+      .scan-history tr:hover {
+        background-color: #00416A;
+        color: #fff;
+      }
+
+      .scan-history td {
+        background-color: #111;
+        color: #ccc;
+      }
+
+      .scan-history h3 {
+        font-size: 2rem;
+        padding-bottom: 2rem;
+        text-align: center;
+        color: rgb(255, 255, 255);
+        letter-spacing: 2px
+      }
+
       .stats-container {
         display: flex;
         justify-content: space-between;
         margin-top: 40px;
-        width: 100%;
-      }
-      .stats-container .image-container {
-        width: 50%;
-        overflow: hidden;    
-        height: 500px;    
+        width: 90%;
       }
 
-      .image-container img{
+      .stats-container .image-container {
+        width: 48%;
+        overflow: hidden;
+        height: 500px;
+        border-radius: 10px;
+      }
+
+      .image-container img {
         width: 100%;
         height: 100%;
         object-fit: contain;
       }
+
       .stats-container .chart-container {
-        width: 50%;
+        width: 48%;
         padding: 10px;
+        background: #111;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       }
 
-      .chart-container h3{
-        font-family: cursive;
-        letter-spacing: 1px;
-      }
       canvas {
-        width: 85% !important;
+        width: 100% !important;
         height: 392px !important;
+        padding: 20px;
       }
-      .heading {
-        font-family: "Spicy Rice", serif;
-        font-weight: 400;
-        font-style: normal;
-        font-size: 3em;
-        position: relative;
-        z-index: 300;
-      }
-      /* Hide extra rows by default */
-      .extra-rows {
-        display: none;
-      }
+
       .pagination-buttons {
         display: flex;
         justify-content: space-between;
@@ -193,40 +210,43 @@
         transform: rotate(270deg);
       }
 
-      .table-container {
-        flex: 1; /* Allows the table to take up remaining space */
-      }
-
       @media (max-width: 480px) {
-        
-        .scan-history th, .scan-history td{
-          padding: 2px;
+        .scan-history th,
+        .scan-history td {
+          padding: 5px;
         }
-        .scan-history table{
-          font-size: 6px;
-        }
-        .stats-container{display: none;}
-        .heading{ padding-top: 4rem;
-          position:relative;
-          z-index:1;
-        font-size: 1.5em;}
 
-        .scan-history h3{
+        .scan-history table {
+          font-size: 12px;
+        }
+
+        .stats-container {
+          display: none;
+        }
+
+        .heading {
+          padding-top: 4rem;
+          font-size: 1.5em;
+        }
+
+        .scan-history h3 {
           font-size: 1rem;
         }
-        .navbar{
+
+        .navbar {
           padding: 5px 0px;
         }
+
         .navContent {
           gap: 1rem;
           padding: 22px;
         }
 
-        body{
-          overflow:initial;
+        body {
+          overflow: initial;
         }
       }
-    </style>
+    </style>    
   </head>
   <body>
     <div class="navbar">
@@ -234,23 +254,13 @@
         <i class="fa-solid fa-shield"></i>
       </div>
       <div class="navContent">
-        <a href="/"
-          ><div><i class="fa-solid fa-house"></i></div
-        ></a>
-        <a href="/home"
-          ><div><i class="fa-brands fa-xing"></i></div
-        ></a>
-        <a href="/dashboard"
-          ><div><i class="fa-solid fa-chart-line"></i></div
-        ></a>
+        <a href="/"><div><i class="fa-solid fa-house"></i></div></a>
+        <a href="/home"><div><i class="fa-brands fa-xing"></i></div></a>
+        <a href="/dashboard"><div><i class="fa-solid fa-chart-line"></i></div></a>
         {% if session['logged_in'] %}
-        <a href="/logout"
-          ><div><i class="fa-solid fa-sign-out-alt"></i> Logout</div></a
-        >
+        <a href="/logout"><div><i class="fa-solid fa-sign-out-alt"></i> Logout</div></a>
         {% else %}
-        <a href="/login"
-          ><div><i class="fa-solid fa-sign-in-alt"></i> Login</div></a
-        >
+        <a href="/login"><div><i class="fa-solid fa-sign-in-alt"></i> Login</div></a>
         {% endif %}
       </div>
     </div>
@@ -283,7 +293,6 @@
           </tbody>
         </table>
 
-        <!-- Pagination container -->
         <div class="pagination-container">
           <div class="pagination-buttons">
             <button id="prevBtn" class="btn" onclick="paginate(-1)">
@@ -296,61 +305,111 @@
         </div>
       </div>
 
-      <!-- New Stats Section -->
       <div class="stats-container">
         <div class="image-container">
-          <img
-            src="{{ url_for('static', filename='dashboardImage.png') }}"
-            alt="Your Image"
-            style="width: 100%; border-radius: 10px"
-          />
+          <img src="{{ url_for('static', filename='graph1.jpg') }}" alt="Your Image" style="width: 100%; border-radius: 10px"/>
         </div>
         <div class="chart-container">
-          <h3>Scan Severity Distribution</h3>
           <canvas id="severityChart"></canvas>
         </div>
       </div>
     </div>
 
     <script>
-        var ctx = document.getElementById('severityChart').getContext('2d');
-        const scannedUrls = {{ scanned_urls|tojson }};
-        let low = 0;
-        let high = 0;
-        let medium = 0;
-        scannedUrls.map((U)=>{
-          if(U.low_count) low += U.low_count;
-          if(U.high_count) high += U.high_count;
-          if(U.medium_count) medium += U.medium_count;
-        });
-        var severityChart = new Chart(ctx, {
-          type: 'bar', // Change to a futuristic chart type
-          data: {
-            labels: ['Medium', 'Low', 'High'],
-            datasets: [
-              {
-                label: 'Severity Counts',
-                data: [medium, low, high],
-                backgroundColor: ['rgba(247, 168, 38, 0.7)'],
-                borderColor: ['#f7a826','#72a03d', '#d33d3d' ],
-                borderWidth: 1,
-                hoverBackgroundColor: ['#f7a826','#72a03d', '#d33d3d' ],
-                hoverBorderWidth: 1,
-                hoverBorderColor: ['#ffcc66','#99cc66', '#ff6666' ],
-                barThickness: 20,
-              }
-            ]
-          },
+      var ctx = document.getElementById('severityChart').getContext('2d');
+      const scannedUrls = {{ scanned_urls|tojson }};
+      let low = 0;
+      let high = 0;
+      let medium = 0;
+
+      scannedUrls.map((U) => {
+        if (U.low_count) low += U.low_count;
+        if (U.high_count) high += U.high_count;
+        if (U.medium_count) medium += U.medium_count;
+      });
+
+      var severityChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Medium', 'Low', 'High'],
+          datasets: [{
+            label: 'Security Issues by Severity',
+            data: [medium, low, high],
+            backgroundColor: ['rgba(54, 162, 235, 0.8)'],
+            borderColor: ['#2185d0'],
+            borderWidth: 2,
+            hoverBackgroundColor: ['rgba(54, 162, 235, 0.95)'],
+            hoverBorderWidth: 3,
+            hoverBorderColor: ['#1678c2'],
+            barThickness: 40,
+          }]
+        },
         options: {
           responsive: true,
-          indexAxis: 'y', // Horizontal bar chart
+          maintainAspectRatio: false,
+          indexAxis: 'y',
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: {
+                color: '#ffffff',
+                font: {
+                  size: 18,
+                  weight: 'bold',
+                  family: "'Inter', sans-serif"
+                },
+                padding: 20
+              }
+            },
+            title: {
+              display: true,
+              text: 'Security Vulnerability Distribution',
+              color: '#ffffff',
+              font: {
+                size: 24,
+                weight: 'bold',
+                family: "'Inter', sans-serif"
+              },
+              padding: {
+                top: 20,
+                bottom: 20
+              }
+            }
+          },
           scales: {
             x: {
-              beginAtZero: true
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(255, 255, 255, 0.1)',
+                lineWidth: 1
+              },
+              ticks: {
+                color: '#ffffff',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                },
+                padding: 10
+              }
+            },
+            y: {
+              grid: {
+                display: false
+              },
+              ticks: {
+                color: '#ffffff',
+                font: {
+                  size: 16,
+                  weight: 'bold'
+                },
+                padding: 10
+              }
             }
           }
         }
       });
+
       var currentPage = 0;
       var rowsPerPage = 3;
       var rows = document.querySelectorAll('.scan-row');
@@ -372,12 +431,10 @@
           }
         });
 
-        // Enable or disable buttons based on current page
         document.getElementById('prevBtn').disabled = currentPage === 0;
         document.getElementById('nextBtn').disabled = end >= rows.length;
       }
 
-      // Initial display of rows
       showRows();
     </script>
   </body>
