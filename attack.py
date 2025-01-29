@@ -23,24 +23,24 @@ def load_payload(file_path):
         return [line.strip() for line in file.readlines()]
 
 # def attack_website(zap, target_url, scan_type, attack_type="all"):
-    mode = attack_type
+#     mode = attack_type
     
-    xss_payloads = load_payload("Payload/xss_payload.txt")
-    sql_payloads = load_payload("Payload/sql_payload.txt")
-    cmd_injection_payloads = load_payload("Payload/cmd_injection_payload.txt")
+#     xss_payloads = load_payload("Payload/xss_payload.txt")
+#     sql_payloads = load_payload("Payload/sql_payload.txt")
+#     cmd_injection_payloads = load_payload("Payload/cmd_injection_payload.txt")
     
-    vulnerabilities = []
+#     vulnerabilities = []
 
-    if mode == "xss" or mode == "all":
-        vulnerabilities += perform_attack(zap, target_url, xss_payloads, "XSS")
+#     if mode == "xss" or mode == "all":
+#         vulnerabilities += perform_attack(zap, target_url, xss_payloads, "XSS")
     
-    if mode == "sql_injection" or mode == "all":
-        vulnerabilities += perform_attack(zap, target_url, sql_payloads, "SQL Injection")
+#     if mode == "sql_injection" or mode == "all":
+#         vulnerabilities += perform_attack(zap, target_url, sql_payloads, "SQL Injection")
     
-    if mode == "command_injection" or mode == "all":
-        vulnerabilities += perform_attack(zap, target_url, cmd_injection_payloads, "Command Injection")
+#     if mode == "command_injection" or mode == "all":
+#         vulnerabilities += perform_attack(zap, target_url, cmd_injection_payloads, "Command Injection")
     
-    return vulnerabilities
+#     return vulnerabilities
 
 
 def attack_website(zap, target_url, scan_type,attack_type):
@@ -48,7 +48,7 @@ def attack_website(zap, target_url, scan_type,attack_type):
     file_path = generate_payload_file_path(target_url,attack_type)
     
     payloads = load_payload(file_path)
-    
+    print(payloads)
     # Limit payload size based on scan type
     def limit_payloads(payloads, scan_type):
         if scan_type == "quick":
@@ -76,7 +76,7 @@ def perform_attack(zap, target_url, payloads, attack_type):
             session = requests.Session()
             session.mount('https://', SSLAdapter())
             
-            response = session.get(f"{target_url}?input={payload}", timeout=30)
+            response = session.get(f"{target_url}?input={payload}", timeout=30,verify=False)
             time.sleep(0.1) 
             
             return zap.core.alerts()
@@ -91,8 +91,7 @@ def perform_attack(zap, target_url, payloads, attack_type):
     vulnerabilities = []
     with ThreadPoolExecutor(max_workers=10) as executor:
         results = list(tqdm(executor.map(send_payload, payloads), total=len(payloads)))
-
+    
     for result in results:
         vulnerabilities.extend(result)
-
     return vulnerabilities

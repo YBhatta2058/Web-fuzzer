@@ -469,6 +469,7 @@ def start_scan():
        
         vulnerabilities = attack.attack_website(zap, target_url, scan_type, attack_type)
         attack_type = "All Attacks"
+        print("Attack completed")
         log_message("Attacks completed.")  # Log the completion of attacks
 
         end_time = time.time()  # Record the end time of the scan
@@ -510,6 +511,7 @@ def start_scan():
             report_path="",  # Placeholder for report path
             user_id=current_user.id  # ID of the user who initiated the scan
         )
+        
         db.session.add(scan)  # Add the scan record to the session
 
     db.session.commit()  # Commit the session to save all scans to the database
@@ -519,7 +521,7 @@ def start_scan():
     combined_results['scan_end_time'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")  # Record the end time of the scan
     combined_report_path = report_generator.generate_combined_report(combined_results)  # Generate the report
     log_message("Report generated successfully.")  # Log the successful generation of the report
-
+    
     # Render the results page with scan details and the combined report
     return render_template('results.html', 
                            target_url=target_url, 

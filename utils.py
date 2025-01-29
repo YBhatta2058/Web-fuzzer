@@ -91,8 +91,3 @@ def generate_payload_file_path(url, attack_type):
         file_path = "custompayloads/custompayloads/test_dummy/payload.txt"
         return file_path
 
-# Example usage
-url = "https://coursera.com"  # Replace with the website URL to classify
-attack_type = "sql_injection"  # Replace with the attack type
-file_path = generate_payload_file_path(url, attack_type)
-print(file_path)
